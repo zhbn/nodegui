@@ -16,6 +16,7 @@ Napi::Object QImageWrap::init(Napi::Env env, Napi::Object exports) {
       env, CLASSNAME,
       {InstanceMethod("allGray", &QImageWrap::allGray),
        InstanceMethod("bitPlaneCount", &QImageWrap::bitPlaneCount),
+       InstanceMethod("bits", &QImageWrap::bits),
        InstanceMethod("bytesPerLine", &QImageWrap::bytesPerLine),
        InstanceMethod("cacheKey", &QImageWrap::cacheKey),
        InstanceMethod("color", &QImageWrap::color),
@@ -112,6 +113,10 @@ Napi::Value QImageWrap::allGray(const Napi::CallbackInfo& info) {
 Napi::Value QImageWrap::bitPlaneCount(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   return Napi::Number::New(env, instance->bitPlaneCount());
+}
+Napi::Value QImageWrap::bits(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  return Napi::ArrayBuffer::New(env, instance->bits(), instance->sizeInBytes());
 }
 
 Napi::Value QImageWrap::bytesPerLine(const Napi::CallbackInfo& info) {

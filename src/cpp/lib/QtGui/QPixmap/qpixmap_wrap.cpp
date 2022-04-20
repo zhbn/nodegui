@@ -17,6 +17,7 @@ Napi::Object QPixmapWrap::init(Napi::Env env, Napi::Object exports) {
        InstanceMethod("scaled", &QPixmapWrap::scaled),
        InstanceMethod("height", &QPixmapWrap::height),
        InstanceMethod("width", &QPixmapWrap::width),
+       InstanceMethod("toImage", &QPixmapWrap::toImage),
        StaticMethod("fromImage", &QPixmapWrap::fromImage),
        StaticMethod("fromQVariant", &StaticQPixmapWrapMethods::fromQVariant),
        COMPONENT_WRAPPED_METHODS_EXPORT_DEFINE(QPixmapWrap)});
@@ -128,7 +129,13 @@ Napi::Value QPixmapWrap::scaled(const Napi::CallbackInfo& info) {
       {Napi::External<QPixmap>::New(env, updatedPixMap)});
   return instance;
 }
-
+Napi::Value QPixmapWrap::toImage(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  QImage image = this->instance->toImage();
+  auto instance = QImageWrap::constructor.New(
+      {Napi::External<QImage>::New(env, new QImage(image))});
+  return instance;
+}
 Napi::Value QPixmapWrap::height(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   return Napi::Value::From(env, this->instance->height());

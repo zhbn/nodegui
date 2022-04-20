@@ -23,6 +23,7 @@ class DLL_EXPORT QImageWrap : public Napi::ObjectWrap<QImageWrap> {
   Napi::Value allGray(const Napi::CallbackInfo& info);
   Napi::Value bitPlaneCount(const Napi::CallbackInfo& info);
   Napi::Value bytesPerLine(const Napi::CallbackInfo& info);
+  Napi::Value bits(const Napi::CallbackInfo& info);
   Napi::Value cacheKey(const Napi::CallbackInfo& info);
   Napi::Value color(const Napi::CallbackInfo& info);
   Napi::Value colorCount(const Napi::CallbackInfo& info);
