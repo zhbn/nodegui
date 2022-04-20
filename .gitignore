@@ -10,3 +10,4 @@ coverage
 /prebuilds
 miniqt
 cmake-build-debug
+package-lock.json
